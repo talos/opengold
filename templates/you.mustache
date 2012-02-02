@@ -1,36 +1,32 @@
 {{#you}}
   {{! CURRENT PLAYER STATE }}
-  <div>Name: {{name}}</div>
-  <div>Loot: {{loot}}</div>
-  <div>Artifacts captured:
-    {{#artifacts.captured}}
-      <span class="card">{{.}}</span>
-    {{/artifacts.captured}}
-  </div>
+  <div>{{name}}: {{loot}}</div>
+  {{#artifacts_captured}}
+    <span class="card card_{{.}}"></span>
+  {{/artifacts_captured}}
 
   {{! SO MANY CHOICES }}
-  <div class="state">
+  <div id="decision">
     {{#joined}}
       <form action="start" method="post">
-        <input type="submit" value="Start Game" />
+        <input type="submit" value="" class="start card" />
       </form>
     {{/joined}}
-    {{#camp}}You're safe at camp.{{/camp}}
+    {{#camp}}<span class="card camp"></span>{{/camp}}
     {{#undecided}}
-      Wither thou?
       <form action="move" method="post">
-        <input type="hidden" name="move" value="han">
-        <input type="submit" value="Han" />
+        <input type="hidden" name="move" value="han" />
+        <input type="submit" value="" class="card han" />
       </form>
       <form action="move" method="post">
-        <input type="hidden" name="move" value="lando">
-        <input type="submit" value="Lando" />
+        <input type="hidden" name="move" value="lando" />
+        <input type="submit" value="" class="card lando" />
       </form>
     {{/undecided}}
-    {{#han}}You're going Han.{{/han}}
-    {{#lando}}Lando-ing out.{{/lando}}
-    {{#won}}Congrats dude, ya won.{{/won}}
-    {{#lost}}Sorry bra, this was not your night.{{/lost}}
+    {{#han}}<span class="card han"></span>{{/han}}
+    {{#lando}}<span class="card lando"></span>{{/lando}}
+    {{#won}}<span class="card won"></span>{{/won}}
+    {{#lost}}<span class="card lost"></span>{{/lost}}
   </div>
 {{/you}}
 {{! JOIN GAME IF NOT STARTED YET }}

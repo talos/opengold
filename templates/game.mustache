@@ -1,14 +1,21 @@
 {{#game}}
-  <div class="players">
+  <div id="players">
     {{#players}}
-      <div class="player {{state}}">
+      <div class="player card {{state}}">
         <span class="player_name">{{name}}</span>
         {{#loot}}<span class="loot">{{loot}} gold</span>{{/loot}}
-        {{#artifacts}}<span class="artifact {{.}}"></span>{{/artifacts}}
+        {{#artifacts}}<span class="card card_{{.}}"></span>{{/artifacts}}
       </div>
     {{/players}}
   </div>
-  <div class="table">
+  <div id="round" class="current_round_{{round}}">
+    <div class="card round_1"></div>
+    <div class="card round_2"></div>
+    <div class="card round_3"></div>
+    <div class="card round_4"></div>
+    <div class="card round_5"></div>
+  </div>
+  <div id="table">
     {{#captured}}
       <span class="card captured card_{{.}}"></span>
     {{/captured}}
@@ -16,12 +23,5 @@
       <span class="card card_{{.}}"></span>
     {{/table}}
   </div>
-  <div class="pot">{{pot}}</div>
-  <div class="round current_round_{{round}}">
-    <span class="card round_1"></span>
-    <span class="card round_2"></span>
-    <span class="card round_3"></span>
-    <span class="card round_4"></span>
-    <span class="card round_5"></span>
-  </div>
+  <div id="pot">{{pot}}</div>
 {{/game}}

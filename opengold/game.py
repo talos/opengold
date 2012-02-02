@@ -44,7 +44,8 @@ NOT_EXISTS = 'not_exists'
 
 ID = 'id'
 
-DEATH_SLEEP = 5
+DEAL_SLEEP = 3
+DEATH_SLEEP = 6
 
 ###
 #
@@ -170,9 +171,11 @@ def _save_update(r, k, update):
     update[UPDATE_ID] = update_id
     r.lpush(path(k, UPDATES), json.dumps(update))
 
-def _save_game_state(r, k):
+def _save_game_state(r, k, reveal=False):
     """
     Saves a JSON representation of the game's current state.
+
+    If reveal is true, the players hash will reveal everyone's move.
     """
     players = _get_players(r, k)
 
@@ -186,7 +189,7 @@ def _save_game_state(r, k):
         PLAYERS:
             [ p if p[STATE] in [WON, LOST] else
               { NAME: p[NAME],
-                STATE: MOVED if p[STATE] in [HAN, LANDO] else p[STATE] }
+                STATE: MOVED if (p[STATE] in [HAN, LANDO] and not reveal) else p[STATE] }
               for p in players],
         TABLE:
             [get_card(idx).name for idx in r.lrange(path(k, TABLE), 0, -1)],
@@ -231,6 +234,12 @@ def _advance_game_state(r, k):
         landos = filter(lambda p: p[STATE] == LANDO, players)
         hans = filter(lambda p: p[STATE] == HAN, players)
         assert len(landos) + len(hans) > 0
+
+        # let everyone see everyone's moves
+        _save_game_state(r, k, True)
+        _publish_update(r, k)
+        coro_sleep(DEAL_SLEEP)
+
         if len(landos):
             _take_loot(r, k, landos)  # LANDO => CAMP
         if len(hans):  # HAN => CAMP | UNDECIDED
@@ -343,11 +352,13 @@ def _deal_card(r, k, hans=[]):
         _save_update(r, k, { DEATH : { PLAYERS: sorted([h[NAME] for h in hans]),
                                        CARD: card.name } })
         # save intermediate game state for death
-        _save_game_state(r, k)
+        for han in hans:
+            r.hset(path(k, PLAYERS, han[NAME]), STATE, DEATH)
+
+        _save_game_state(r, k, True)
         _publish_update(r, k)
-        print 'death sleepin...'
+
         coro_sleep(DEATH_SLEEP)
-        print 'done death sleepin!'
         new_state = CAMP
     else:
         new_state = UNDECIDED

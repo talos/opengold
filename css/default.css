@@ -11,38 +11,59 @@ input#chat {
     width: 20em;
 }
 
-.players {
-    background: url('img/interface/players.png') #aa9;
+#players {
+    float: left;
+}
+
+#table {
     text-align: center;
 }
 
-.table {
-    background: url('img/interface/table.png') #aa9;
+#pot {
     text-align: center;
 }
 
-.pot {
-    background: url('img/interface/pot.png') #aa9;
-    text-align: center;
+#round {
+    float: right;
 }
 
-.round {
-    background: url('img/interface/round.png') #aa9;
+#you {
     text-align: center;
 }
 
 .card {
+    width: 100px;
+    height: 125px;
+    background-size: 100%;
+    margin: 2px;
+}
+
+span.card {
     display: inline-block;
-    width: 200px;
-    height: 250px;
 }
 
 .card.captured {
     border: 4px solid red;
 }
 
+/* Players */
 .player {
-    display: inline-block;
+}
+
+.player.joined {
+
+}
+
+.player.camp {
+
+}
+
+.player.undecided {
+
+}
+
+.player.decided {
+
 }
 
 /* Artifacts */
@@ -115,3 +136,18 @@ input#chat {
 .current_round_done .round_3 { background-image: url('img/round/3.png'); }
 .current_round_done .round_2 { background-image: url('img/round/2.png'); }
 .current_round_done .round_1 { background-image: url('img/round/1.png'); }
+
+/* You */
+#decision input {
+    border: none;
+    cursor: pointer;
+}
+.start { background-image: url('img/player/start.png') }
+.camp { background-image: url('img/player/camp.png') }
+.lando { background-image: url('img/player/lando.png') }
+.han { background-image: url('img/player/han.png') }
+.undecided { background-image: url('img/player/undecided.png') }
+.moved { background-image: url('img/player/moved.png') }
+.death { background-image: url('img/player/death.png') }
+.won { background-image: url('img/player/won.png') }
+.lost { background-image: url('img/player/lost.png') }
