@@ -5,9 +5,14 @@ body {
 
 form {
     display: inline-block;
+    position: relative;
 }
 
-input#chat {
+#chat form {
+    width: 20em;
+}
+
+#chat input {
     width: 20em;
 }
 
@@ -36,34 +41,16 @@ input#chat {
     height: 125px;
     background-size: 100%;
     margin: 2px;
+    text-align: center;
+    vertical-align: top;
 }
 
 span.card {
     display: inline-block;
 }
 
-.card.captured {
-    border: 4px solid red;
-}
-
 /* Players */
 .player {
-}
-
-.player.joined {
-
-}
-
-.player.camp {
-
-}
-
-.player.undecided {
-
-}
-
-.player.decided {
-
 }
 
 /* Artifacts */
@@ -81,6 +68,8 @@ span.card {
 .card_spiders { background-image: url('img/hazards/spiders.png'); }
 
 /* Treasures */
+.pot { background-image: url('img/treasures/pot.png'); }
+.pot.pot_0 { visibility: hidden; width: 0px; height: 0px; }
 .card_1  { background-image: url('img/treasures/1.png'); }
 .card_2  { background-image: url('img/treasures/2.png'); }
 .card_3  { background-image: url('img/treasures/3.png'); }
@@ -94,6 +83,19 @@ span.card {
 .card_15 { background-image: url('img/treasures/15.png'); }
 .card_17 { background-image: url('img/treasures/17.png'); }
 
+.card_1.captured  { background-image: url('img/treasures/1_captured.png'); }
+.card_2.captured  { background-image: url('img/treasures/2_captured.png'); }
+.card_3.captured  { background-image: url('img/treasures/3_captured.png'); }
+.card_4.captured  { background-image: url('img/treasures/4_captured.png'); }
+.card_5.captured  { background-image: url('img/treasures/5_captured.png'); }
+.card_7.captured  { background-image: url('img/treasures/7_captured.png'); }
+.card_9.captured  { background-image: url('img/treasures/9_captured.png'); }
+.card_11.captured { background-image: url('img/treasures/11_captured.png'); }
+.card_13.captured { background-image: url('img/treasures/13_captured.png'); }
+.card_14.captured { background-image: url('img/treasures/14_captured.png'); }
+.card_15.captured { background-image: url('img/treasures/15_captured.png'); }
+.card_17.captured { background-image: url('img/treasures/17_captured.png'); }
+
 /* Rounds */
 .current_round_ .round_5 { background-image: url('img/round/back.png'); }
 .current_round_ .round_4 { background-image: url('img/round/back.png'); }
@@ -105,27 +107,27 @@ span.card {
 .current_round_1 .round_4 { background-image: url('img/round/back.png'); }
 .current_round_1 .round_3 { background-image: url('img/round/back.png'); }
 .current_round_1 .round_2 { background-image: url('img/round/back.png'); }
-.current_round_1 .round_1 { background-image: url('img/round/1.png'); }
+.current_round_1 .round_1 { background-image: url('img/round/1_active.png'); }
 
 .current_round_2 .round_5 { background-image: url('img/round/back.png'); }
 .current_round_2 .round_4 { background-image: url('img/round/back.png'); }
 .current_round_2 .round_3 { background-image: url('img/round/back.png'); }
-.current_round_2 .round_2 { background-image: url('img/round/2.png'); }
+.current_round_2 .round_2 { background-image: url('img/round/2_active.png'); }
 .current_round_2 .round_1 { background-image: url('img/round/1.png'); }
 
 .current_round_3 .round_5 { background-image: url('img/round/back.png'); }
 .current_round_3 .round_4 { background-image: url('img/round/back.png'); }
-.current_round_3 .round_3 { background-image: url('img/round/3.png'); }
+.current_round_3 .round_3 { background-image: url('img/round/3_active.png'); }
 .current_round_3 .round_2 { background-image: url('img/round/2.png'); }
 .current_round_3 .round_1 { background-image: url('img/round/1.png'); }
 
 .current_round_4 .round_5 { background-image: url('img/round/back.png'); }
-.current_round_4 .round_4 { background-image: url('img/round/4.png'); }
+.current_round_4 .round_4 { background-image: url('img/round/4_active.png'); }
 .current_round_4 .round_3 { background-image: url('img/round/3.png'); }
 .current_round_4 .round_2 { background-image: url('img/round/2.png'); }
 .current_round_4 .round_1 { background-image: url('img/round/1.png'); }
 
-.current_round_5 .round_5 { background-image: url('img/round/5.png'); }
+.current_round_5 .round_5 { background-image: url('img/round/5_active.png'); }
 .current_round_5 .round_4 { background-image: url('img/round/4.png'); }
 .current_round_5 .round_3 { background-image: url('img/round/3.png'); }
 .current_round_5 .round_2 { background-image: url('img/round/2.png'); }
@@ -137,17 +139,37 @@ span.card {
 .current_round_done .round_2 { background-image: url('img/round/2.png'); }
 .current_round_done .round_1 { background-image: url('img/round/1.png'); }
 
+
 /* You */
 #decision input {
     border: none;
     cursor: pointer;
 }
-.start { background-image: url('img/player/start.png') }
-.camp { background-image: url('img/player/camp.png') }
-.lando { background-image: url('img/player/lando.png') }
-.han { background-image: url('img/player/han.png') }
+.your_name {
+    text-size: 2em;
+}
+.loot      { background-image: url('img/player/loot.png') }
+.joined    { background-image: url('img/player/start.png') }
+.start     { background-image: url('img/player/start.png') }
+.camp      { background-image: url('img/player/camp.png') }
+.lando     { background-image: url('img/player/lando.png') }
+.han       { background-image: url('img/player/han.png') }
 .undecided { background-image: url('img/player/undecided.png') }
-.moved { background-image: url('img/player/moved.png') }
-.death { background-image: url('img/player/death.png') }
-.won { background-image: url('img/player/won.png') }
-.lost { background-image: url('img/player/lost.png') }
+.moved     { background-image: url('img/player/moved.png') }
+.death     { background-image: url('img/player/death.png') }
+.won       { background-image: url('img/player/won.png') }
+.lost      { background-image: url('img/player/lost.png') }
+
+/* Updates */
+#updates div {
+    color: #666;
+    padding-bottom: .2em;
+}
+
+#updates .speaker {
+    color: black;
+    font-weight: bold;
+}
+#updates .message {
+    color: black;
+}

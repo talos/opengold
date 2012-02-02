@@ -275,6 +275,8 @@ def _next_round(r, k, players):
         r.sadd(path(k, DECK), *return_to_deck)
         r.delete(path(k, TABLE), path(k, CAPTURED))
 
+    r.set(path(k, POT), 0)
+
     for player in players:
         r.hset(path(k, PLAYERS, player[NAME]), STATE, UNDECIDED)
 

@@ -1,10 +1,4 @@
 {{#you}}
-  {{! CURRENT PLAYER STATE }}
-  <div>{{name}}: {{loot}}</div>
-  {{#artifacts_captured}}
-    <span class="card card_{{.}}"></span>
-  {{/artifacts_captured}}
-
   {{! SO MANY CHOICES }}
   <div id="decision">
     {{#joined}}
@@ -28,15 +22,22 @@
     {{#won}}<span class="card won"></span>{{/won}}
     {{#lost}}<span class="card lost"></span>{{/lost}}
   </div>
+  {{! CURRENT PLAYER STATE }}
+  <div>
+    <span class="your_name">{{name}}</span>
+    <span class="card loot">{{loot}}</span>
+    {{#artifacts_captured}}
+      <span class="card card_{{.}}"></span>
+    {{/artifacts_captured}}
+  </div>
 {{/you}}
 {{! JOIN GAME IF NOT STARTED YET }}
 {{^you}}
 {{#game}}
   {{^round}}
   <form action="join" method="post">
-    <label for="name">Join this game as:</label>
-    <input type="text" name="player" />
-    <input type="submit" value="Join" />
+    <input type="text" title="Name" name="player" />
+    <input type="submit" value="" class="card join" />
   </form>
   {{/round}}
 {{/game}}

@@ -16,6 +16,7 @@
     <div class="card round_5"></div>
   </div>
   <div id="table">
+    <span class="card pot pot_{{pot}}">{{pot}}</span>
     {{#captured}}
       <span class="card captured card_{{.}}"></span>
     {{/captured}}
@@ -23,5 +24,4 @@
       <span class="card card_{{.}}"></span>
     {{/table}}
   </div>
-  <div id="pot">{{pot}}</div>
 {{/game}}
