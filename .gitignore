@@ -6,3 +6,4 @@ mongrel2.conf
 build/*
 run/*
 log/*
+imgbucket/*

@@ -1,6 +1,6 @@
-div {
-    border: 1px solid #ccc;
-    padding: .2em;
+body {
+    margin: 0px;
+    padding: 0px;
 }
 
 form {
@@ -10,3 +10,108 @@ form {
 input#chat {
     width: 20em;
 }
+
+.players {
+    background: url('img/interface/players.png') #aa9;
+    text-align: center;
+}
+
+.table {
+    background: url('img/interface/table.png') #aa9;
+    text-align: center;
+}
+
+.pot {
+    background: url('img/interface/pot.png') #aa9;
+    text-align: center;
+}
+
+.round {
+    background: url('img/interface/round.png') #aa9;
+    text-align: center;
+}
+
+.card {
+    display: inline-block;
+    width: 200px;
+    height: 250px;
+}
+
+.card.captured {
+    border: 4px solid red;
+}
+
+.player {
+    display: inline-block;
+}
+
+/* Artifacts */
+.card_cockring    { background-image: url('img/artifacts/cockring.png'); }
+.card_gingerbread { background-image: url('img/artifacts/gingerbread.png'); }
+.card_nazi        { background-image: url('img/artifacts/nazi.png'); }
+.card_shrek       { background-image: url('img/artifacts/shrek.png'); }
+.card_tube        { background-image: url('img/artifacts/tube.png'); }
+
+/* Hazards */
+.card_bitches { background-image: url('img/hazards/bitches.png'); }
+.card_bricks  { background-image: url('img/hazards/bricks.png'); }
+.card_fire    { background-image: url('img/hazards/fire.png'); }
+.card_snakes  { background-image: url('img/hazards/snakes.png'); }
+.card_spiders { background-image: url('img/hazards/spiders.png'); }
+
+/* Treasures */
+.card_1  { background-image: url('img/treasures/1.png'); }
+.card_2  { background-image: url('img/treasures/2.png'); }
+.card_3  { background-image: url('img/treasures/3.png'); }
+.card_4  { background-image: url('img/treasures/4.png'); }
+.card_5  { background-image: url('img/treasures/5.png'); }
+.card_7  { background-image: url('img/treasures/7.png'); }
+.card_9  { background-image: url('img/treasures/9.png'); }
+.card_11 { background-image: url('img/treasures/11.png'); }
+.card_13 { background-image: url('img/treasures/13.png'); }
+.card_14 { background-image: url('img/treasures/14.png'); }
+.card_15 { background-image: url('img/treasures/15.png'); }
+.card_17 { background-image: url('img/treasures/17.png'); }
+
+/* Rounds */
+.current_round_ .round_5 { background-image: url('img/round/back.png'); }
+.current_round_ .round_4 { background-image: url('img/round/back.png'); }
+.current_round_ .round_3 { background-image: url('img/round/back.png'); }
+.current_round_ .round_2 { background-image: url('img/round/back.png'); }
+.current_round_ .round_1 { background-image: url('img/round/back.png'); }
+
+.current_round_1 .round_5 { background-image: url('img/round/back.png'); }
+.current_round_1 .round_4 { background-image: url('img/round/back.png'); }
+.current_round_1 .round_3 { background-image: url('img/round/back.png'); }
+.current_round_1 .round_2 { background-image: url('img/round/back.png'); }
+.current_round_1 .round_1 { background-image: url('img/round/1.png'); }
+
+.current_round_2 .round_5 { background-image: url('img/round/back.png'); }
+.current_round_2 .round_4 { background-image: url('img/round/back.png'); }
+.current_round_2 .round_3 { background-image: url('img/round/back.png'); }
+.current_round_2 .round_2 { background-image: url('img/round/2.png'); }
+.current_round_2 .round_1 { background-image: url('img/round/1.png'); }
+
+.current_round_3 .round_5 { background-image: url('img/round/back.png'); }
+.current_round_3 .round_4 { background-image: url('img/round/back.png'); }
+.current_round_3 .round_3 { background-image: url('img/round/3.png'); }
+.current_round_3 .round_2 { background-image: url('img/round/2.png'); }
+.current_round_3 .round_1 { background-image: url('img/round/1.png'); }
+
+.current_round_4 .round_5 { background-image: url('img/round/back.png'); }
+.current_round_4 .round_4 { background-image: url('img/round/4.png'); }
+.current_round_4 .round_3 { background-image: url('img/round/3.png'); }
+.current_round_4 .round_2 { background-image: url('img/round/2.png'); }
+.current_round_4 .round_1 { background-image: url('img/round/1.png'); }
+
+.current_round_5 .round_5 { background-image: url('img/round/5.png'); }
+.current_round_5 .round_4 { background-image: url('img/round/4.png'); }
+.current_round_5 .round_3 { background-image: url('img/round/3.png'); }
+.current_round_5 .round_2 { background-image: url('img/round/2.png'); }
+.current_round_5 .round_1 { background-image: url('img/round/1.png'); }
+
+.current_round_done .round_5 { background-image: url('img/round/5.png'); }
+.current_round_done .round_4 { background-image: url('img/round/4.png'); }
+.current_round_done .round_3 { background-image: url('img/round/3.png'); }
+.current_round_done .round_2 { background-image: url('img/round/2.png'); }
+.current_round_done .round_1 { background-image: url('img/round/1.png'); }
