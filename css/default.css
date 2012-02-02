@@ -1,6 +1,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-family: Courier New, Courier, monospace;
 }
 
 form {
@@ -8,21 +9,99 @@ form {
     position: relative;
 }
 
-#chat form {
-    width: 20em;
+#banner {
+    margin: 0em 0em 1em 0em;
+    padding: .5em;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 1em;
+    color: black;
+    border: solid black;
+    border-width: 0px 0px 1px 0px;
+}
+
+#list {
+    list-style-type: none;
+    line-height: 1.5em;
+}
+
+#list .game.round_ a {
+    color: green;
+}
+
+#list .game a {
+    color: orange;
+    text-decoration: none;
+}
+
+#list .game a:hover {
+    font-weight: bold;
+}
+
+#list .game.round_done a {
+    color: red;
+}
+
+input.text {
+    width: 250px;
+    height: 1.5em;
+    border: 1px solid black;
 }
 
 #chat input {
-    width: 20em;
+    width: 250px;
+    height: 1.5em;
+    border: 1px solid black;
+}
+
+#app {
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#banner a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#chat form {
+    text-align: left;
+    width: 300px;
+}
+
+#chat input {
+    width: 250px;
+    height: 1.5em;
+    border: 1px solid black;
 }
 
 #players {
     float: left;
+    width: 120px;
 }
 
 #table {
     text-align: center;
+    display: inline-block;
+    width: 360px;
+    border: 1px solid black;
+    padding: .5em;
+    margin: .5em;
+    border-radius: .5em;
 }
+
+#table.round_ {
+    display: none;
+}
+
+/* #table div { */
+/*     display: inline-block; */
+/*     border: 1px solid black; */
+/*     padding: .5em; */
+/*     margin: .5em; */
+/*     border-radius: .5em; */
+/* } */
 
 #pot {
     text-align: center;
@@ -30,10 +109,18 @@ form {
 
 #round {
     float: right;
+    width: 120px;
 }
 
 #you {
     text-align: center;
+}
+
+#you #state {
+    float: left;
+    padding-right: 1em;
+    display: block;
+    width: 120px;
 }
 
 .card {
@@ -47,6 +134,16 @@ form {
 
 span.card {
     display: inline-block;
+}
+
+input.card {
+    border: none;
+    cursor: pointer;
+}
+
+input.card:hover {
+    border: 1px solid red;
+    border-radius: 7px;
 }
 
 /* Players */
@@ -69,6 +166,7 @@ span.card {
 
 /* Treasures */
 .pot { background-image: url('img/treasures/pot.png'); }
+.pot.pot_ { visibility: hidden; width: 0px; height: 0px; }
 .pot.pot_0 { visibility: hidden; width: 0px; height: 0px; }
 .card_1  { background-image: url('img/treasures/1.png'); }
 .card_2  { background-image: url('img/treasures/2.png'); }
@@ -97,11 +195,12 @@ span.card {
 .card_17.captured { background-image: url('img/treasures/17_captured.png'); }
 
 /* Rounds */
-.current_round_ .round_5 { background-image: url('img/round/back.png'); }
-.current_round_ .round_4 { background-image: url('img/round/back.png'); }
-.current_round_ .round_3 { background-image: url('img/round/back.png'); }
-.current_round_ .round_2 { background-image: url('img/round/back.png'); }
-.current_round_ .round_1 { background-image: url('img/round/back.png'); }
+.current_round_ { display: none }
+/* .current_round_ .round_5 { background-image: url('img/round/back.png'); } */
+/* .current_round_ .round_4 { background-image: url('img/round/back.png'); } */
+/* .current_round_ .round_3 { background-image: url('img/round/back.png'); } */
+/* .current_round_ .round_2 { background-image: url('img/round/back.png'); } */
+/* .current_round_ .round_1 { background-image: url('img/round/back.png'); } */
 
 .current_round_1 .round_5 { background-image: url('img/round/back.png'); }
 .current_round_1 .round_4 { background-image: url('img/round/back.png'); }
@@ -141,13 +240,12 @@ span.card {
 
 
 /* You */
-#decision input {
-    border: none;
-    cursor: pointer;
-}
+
 .your_name {
-    text-size: 2em;
+    font-size: 2em;
+    font-weight: bold;
 }
+.join      { background-image: url('img/player/join.png') }
 .loot      { background-image: url('img/player/loot.png') }
 .joined    { background-image: url('img/player/start.png') }
 .start     { background-image: url('img/player/start.png') }
@@ -162,8 +260,10 @@ span.card {
 
 /* Updates */
 #updates div {
+    text-align: left;
     color: #666;
-    padding-bottom: .2em;
+    line-height: 1.5em;
+    padding-right: 1em;
 }
 
 #updates .speaker {

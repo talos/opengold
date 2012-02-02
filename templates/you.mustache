@@ -1,44 +1,45 @@
-{{#you}}
-  {{! SO MANY CHOICES }}
-  <div id="decision">
-    {{#joined}}
-      <form action="start" method="post">
-        <input type="submit" value="" class="start card" />
-      </form>
-    {{/joined}}
-    {{#camp}}<span class="card camp"></span>{{/camp}}
-    {{#undecided}}
-      <form action="move" method="post">
-        <input type="hidden" name="move" value="han" />
-        <input type="submit" value="" class="card han" />
-      </form>
-      <form action="move" method="post">
-        <input type="hidden" name="move" value="lando" />
-        <input type="submit" value="" class="card lando" />
-      </form>
-    {{/undecided}}
-    {{#han}}<span class="card han"></span>{{/han}}
-    {{#lando}}<span class="card lando"></span>{{/lando}}
-    {{#won}}<span class="card won"></span>{{/won}}
-    {{#lost}}<span class="card lost"></span>{{/lost}}
-  </div>
-  {{! CURRENT PLAYER STATE }}
-  <div>
-    <span class="your_name">{{name}}</span>
-    <span class="card loot">{{loot}}</span>
-    {{#artifacts_captured}}
-      <span class="card card_{{.}}"></span>
-    {{/artifacts_captured}}
-  </div>
-{{/you}}
-{{! JOIN GAME IF NOT STARTED YET }}
-{{^you}}
-{{#game}}
-  {{^round}}
-  <form action="join" method="post">
-    <input type="text" title="Name" name="player" />
-    <input type="submit" value="" class="card join" />
-  </form>
-  {{/round}}
-{{/game}}
-{{/you}}
+<div>
+  {{#you}}
+    {{! SO MANY CHOICES }}
+    <div id="decision">
+      {{#joined}}
+        <form action="start" method="post">
+          <input type="submit" value="" class="start card" />
+        </form>
+      {{/joined}}
+      {{#camp}}<span class="card camp"></span>{{/camp}}
+      {{#undecided}}
+          <form action="move" method="post">
+            <input type="hidden" name="move" value="han" />
+            <input type="submit" value="" class="card han" />
+          </form>
+          <form action="move" method="post">
+            <input type="hidden" name="move" value="lando" />
+            <input type="submit" value="" class="card lando" />
+          </form>
+      {{/undecided}}
+      {{#han}}<span class="card han"></span>{{/han}}
+      {{#lando}}<span class="card lando"></span>{{/lando}}
+      {{#won}}<span class="card won"></span>{{/won}}
+      {{#lost}}<span class="card lost"></span>{{/lost}}
+    </div>
+    {{! CURRENT PLAYER STATE }}
+    <div id="state">
+      <span class="card loot">{{loot}}</span>
+      {{#artifacts_captured}}
+        <span class="card card_{{.}}"></span>
+      {{/artifacts_captured}}
+    </div>
+  {{/you}}
+  {{! JOIN GAME IF NOT STARTED YET }}
+  {{^you}}
+  {{#game}}
+    {{^round}}
+    <form action="join" method="post">
+      <div><input class="text" type="text" title="Name" name="player" /></div>
+      <div><input type="submit" value="" class="card join" /></div>
+    </form>
+    {{/round}}
+  {{/game}}
+  {{/you}}
+</div>

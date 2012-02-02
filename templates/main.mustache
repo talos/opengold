@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="/css/default.css" />
 
   <title>
-    {{#game}}Opengold{{/game}}
+    {{#game}}Opengold {{name}}{{/game}}
     {{^game}}Opengold Games{{/game}}
   </title>
 
@@ -22,35 +22,40 @@
       </div>
     {{/error}}
 
+    <div id="banner"><a href="/">Opengold</a> {{name}}</div>
+
     <div id="app">
+      <div id="app_inside">
       {{^game}}
         {{> create}}
-        <div id="list">
+        <ul id="list">
           {{> list}}
         </div>
       {{/game}}
 
       {{^games}}
-        <a href="/">Other games</a>
         {{! CURENT GAME STATE }}
         <div id="game">
           {{> game}}
         </div>
 
         {{! IN-GAME BLOCK }}
-        <div id="you">
+        <div id="below">
+          <div id="you">
             {{> you}}
-        </div>
+          </div>
 
-        <div id="chat">
-          {{> chat}}
-        </div>
+          <div id="chat">
+            {{> chat}}
+          </div>
 
-        {{! UPDATES FOR CURRENT GAME }}
-        <div id="updates">
-          {{> updates}}
+          {{! UPDATES FOR CURRENT GAME }}
+          <div id="updates">
+            {{> updates}}
+          </div>
         </div>
-      {{/games}}
+        {{/games}}
+      </div>
     </div>
 
     <noscript>

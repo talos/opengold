@@ -4,13 +4,13 @@
     {{#join}}<strong>{{name}}</strong> joined the game.{{/join}}
     {{#start}}<strong>{{name}}</strong> wants to start venturing.{{/start}}
     {{#move}}<strong>{{name}}</strong> made their move.{{/move}}
-    {{#han}}{{#players}}<strong>{{.}}</strong> {{/players}} went han.{{/han}}
+    {{#han}}{{#players}}<strong>{{.}}</strong>, {{/players}} went han.{{/han}}
     {{#lando}}
-      {{#players}}<strong>{{.}}</strong> {{/players}}
+      {{#players}}<strong>{{.}}</strong>, {{/players}}
         landoed out, capturing <strong>{{value}}</strong> gold and leaving <strong>{{pot}}</strong> behind.
     {{/lando}}
     {{#death}}
-      {{#players}}<strong>{{.}}</strong> {{/players}}
+      {{#players}}<strong>{{.}}</strong>, {{/players}}
         died of <strong>{{card}}</strong>.
     {{/death}}
     {{#round}}Round <strong>{{round}}</strong>{{/round}}

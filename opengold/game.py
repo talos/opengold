@@ -495,12 +495,14 @@ def info(r, k, player=None, start_info_id=-1, num_updates=10):
         if start_info_id >= cur_id:
             if start_info_id == -1:
                 start_info_id = 0
-                yield { GAME: { NOT_EXISTS: True },
+                yield { NAME: k,
+                        GAME: { NOT_EXISTS: True },
                         UPDATE_ID: start_info_id }
             listener.next()
         else:
             # Components are already in JSON.
             info = {
+                NAME: k,
                 UPDATES:
                     [json.loads(j) for j in r.lrange(path(k, UPDATES), 0, num_updates)],
                 ID: cur_id }

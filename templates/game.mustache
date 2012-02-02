@@ -3,8 +3,8 @@
     {{#players}}
       <div class="player card {{state}}">
         <span class="player_name">{{name}}</span>
-        {{#loot}}<span class="loot">{{loot}} gold</span>{{/loot}}
-        {{#artifacts}}<span class="card card_{{.}}"></span>{{/artifacts}}
+        {{#loot}}: {{loot}} gold{{/loot}}
+        {{#artifacts}}, {{.}}{{/artifacts}}
       </div>
     {{/players}}
   </div>
@@ -15,7 +15,7 @@
     <div class="card round_4"></div>
     <div class="card round_5"></div>
   </div>
-  <div id="table">
+  <div id="table" class="round_{{round}}">
     <span class="card pot pot_{{pot}}">{{pot}}</span>
     {{#captured}}
       <span class="card captured card_{{.}}"></span>
