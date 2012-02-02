@@ -11,7 +11,7 @@ _HAZARDS = [Hazard(name)
            for name, i in product(['bitches', 'spiders', 'snakes', 'fire', 'bricks'],
                                   xrange(3))]
 _ARTIFACTS = [Artifact(name)
-             for name in ['zefrim cockring', 'shrek', 'tube', 'nazi', 'gingerbread man']]
+             for name in ['cockring', 'shrek', 'tube', 'nazi', 'gingerbread']]
 
 _DECK = _TREASURES + _HAZARDS + _ARTIFACTS
 

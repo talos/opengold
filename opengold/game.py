@@ -3,6 +3,11 @@ from redis import WatchError
 import json
 import time
 
+try:
+    from gevent import sleep as coro_sleep
+except:
+    from eventlet import sleep as coro_sleep
+
 ARTIFACT_VALUES = [5, 5, 10, 10, 15] # Value corresponding to which artifact this is.  Beware of the 0-index.
 
 # Player states
@@ -38,6 +43,8 @@ MOVED = 'moved'
 NOT_EXISTS = 'not_exists'
 
 ID = 'id'
+
+DEATH_SLEEP = 5
 
 ###
 #
@@ -334,7 +341,13 @@ def _deal_card(r, k, hans=[]):
 
     if isinstance(card, Hazard) and card.name in prior_card_names:
         _save_update(r, k, { DEATH : { PLAYERS: sorted([h[NAME] for h in hans]),
-                                  CARD: card.name } })
+                                       CARD: card.name } })
+        # save intermediate game state for death
+        _save_game_state(r, k)
+        _publish_update(r, k)
+        print 'death sleepin...'
+        coro_sleep(DEATH_SLEEP)
+        print 'done death sleepin!'
         new_state = CAMP
     else:
         new_state = UNDECIDED
