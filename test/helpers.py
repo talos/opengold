@@ -94,43 +94,40 @@ def fake_deal(r, mocked_key, card_name):
     r.spop = mock_pop
 
 
-HOST = "http://localhost:6767"
+HOST = "http://localhost:2000"
 
 class TestOpengoldServer(unittest.TestCase):
     """
-    Subclass this to get a test case that starts and shuts down both
-    the Opengold server instance and mongrel. It will work with the
-    "TestServer" Redis db, clearing it between tests.
     """
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Start up opengold & mongrel.
-        """
-        cls.server = subprocess.Popen('m2sh start -host localhost',
-                                      shell=True,
-                                      stdout=subprocess.PIPE,
-                                      stderr=subprocess.PIPE
-                                      )
-        cls.app = subprocess.Popen('python opengold/server.py test',
-                                   shell=True,
-                                   # stdout=subprocess.PIPE,
-                                   # stderr=subprocess.PIPE
-                                   )
+    # @classmethod
+    # def setUpClass(cls):
+    #     """
+    #     Start up opengold & mongrel.
+    #     """
+    #     cls.server = subprocess.Popen('m2sh start -host localhost',
+    #                                   shell=True,
+    #                                   stdout=subprocess.PIPE,
+    #                                   stderr=subprocess.PIPE
+    #                                   )
+    #     cls.app = subprocess.Popen('python opengold/server.py test',
+    #                                shell=True,
+    #                                # stdout=subprocess.PIPE,
+    #                                # stderr=subprocess.PIPE
+    #                                )
 
-        LOG.info("Waiting for server to start")
-        time.sleep(2)
-        LOG.info("Finished waiting for server to start")
+    #     LOG.info("Waiting for server to start")
+    #     time.sleep(2)
+    #     LOG.info("Finished waiting for server to start")
 
-    @classmethod
-    def tearDownClass(cls):
-        """
-        Shut down opengold & mongrel.
-        """
-        cls.app.terminate()
-        cls.app.wait()
-        subprocess.Popen('m2sh stop -host localhost', shell=True)
+    # @classmethod
+    # def tearDownClass(cls):
+    #     """
+    #     Shut down opengold & mongrel.
+    #     """
+    #     cls.app.terminate()
+    #     cls.app.wait()
+    #     subprocess.Popen('m2sh stop -host localhost', shell=True)
 
     def setUp(self):
         """

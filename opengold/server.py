@@ -1,78 +1,20 @@
-#!/usr/bin/env python
-
 import redis
 import json
-import sys
 import urllib2
-import uuid
-from ConfigParser import SafeConfigParser
 
 import game
+from config import DB, JS_PATH, COOKIE_SECRET, LONGPOLL_TIMEOUT, RECV_SPEC, \
+                   SEND_SPEC
 from templating import load_mustache_env, MustacheRendering
 
 from brubeck.request_handling import Brubeck, WebMessageHandler
 
 try:
     import gevent.timeout as coro_timeout
+    coro_timeout
 except ImportError:
     import eventlet.timeout as coro_timeout
 
-###
-#
-# CONFIG
-#
-###
-if len(sys.argv) != 2:
-    print """
-Opengold server must be invoked with a single argument, telling it
-which mode from `config.ini` to use:
-
-python opengold/server.py <MODE>
-
-Look at `config.ini` for defined modes. Defaults are `production`,
-`staging`, and `test`."""
-    exit(1)
-
-MODE = sys.argv[1]
-PARSER = SafeConfigParser()
-
-DB = 'db'
-JS_PATH = 'js_path'
-COOKIE_SECRET = 'cookie_secret'
-LONGPOLL_TIMEOUT = 'longpoll_timeout'
-RECV_SPEC = 'recv_spec'
-SEND_SPEC = 'send_spec'
-
-if not len(PARSER.read('config.ini')):
-    print "No config.ini file found in this directory.  Writing a config..."
-
-    modes = ['production', 'staging', 'test']
-    for i in range(0, len(modes)):
-        mode = modes[i]
-        PARSER.add_section(mode)
-        PARSER.set(mode, DB, str(i))
-        PARSER.set(mode, JS_PATH, '/js/build')
-        PARSER.set(mode, COOKIE_SECRET, str(uuid.uuid4()))
-        PARSER.set(mode, LONGPOLL_TIMEOUT, '20')
-        PARSER.set(mode, RECV_SPEC, 'ipc://127.0.0.1:9001')
-        PARSER.set(mode, SEND_SPEC, 'ipc://127.0.0.1:9000')
-
-    try:
-        conf = open('config.ini', 'w')
-        PARSER.write(conf)
-        conf.close()
-    except IOError:
-        print "Could not write config file to `config.ini`, exiting..."
-        exit(1)
-
-config = {
-    DB: int(PARSER.get(MODE, DB)),
-    JS_PATH: PARSER.get(MODE, JS_PATH),
-    COOKIE_SECRET: PARSER.get(MODE, COOKIE_SECRET),
-    LONGPOLL_TIMEOUT: int(PARSER.get(MODE, LONGPOLL_TIMEOUT)),
-    RECV_SPEC: PARSER.get(MODE, RECV_SPEC),
-    SEND_SPEC: PARSER.get(MODE, SEND_SPEC),
-}
 
 ###
 #
@@ -166,14 +108,14 @@ class GameListHandler(MustacheRendering):
         games = game.games(self.db_conn, *opt_id)
 
         try:
-            context = coro_timeout.with_timeout(config[LONGPOLL_TIMEOUT], games.next)
+            context = coro_timeout.with_timeout(LONGPOLL_TIMEOUT, games.next)
 
             if is_json_request(self.message):
                 self.headers['Content-Type'] = 'application/json'
                 self.set_body(json.dumps(context))
                 return self.render()
             else:
-                context[JS_PATH] = config[JS_PATH]
+                context[JS_PATH] = JS_PATH
                 return self.render_template('main', **context)
         except coro_timeout.Timeout:
             if is_json_request(self.message):
@@ -223,13 +165,13 @@ class GameHandler(MustacheRendering, PlayerMixin):
         info = game.info(self.db_conn, game_name, self.get_player(game_name), *opt_id)
 
         try:
-            context = coro_timeout.with_timeout(config[LONGPOLL_TIMEOUT], info.next)
+            context = coro_timeout.with_timeout(LONGPOLL_TIMEOUT, info.next)
             if is_json_request(self.message):
                 self.headers['Content-Type'] = 'application/json'
                 self.set_body(json.dumps(context))
                 return self.render()
             else:
-                context[JS_PATH] = config[JS_PATH]
+                context[JS_PATH] = JS_PATH
                 return self.render_template('main', **context)
         except coro_timeout.Timeout:
             if is_json_request(self.message):
@@ -329,8 +271,8 @@ class MoveHandler(WebMessageHandler, PlayerMixin):
 # BRUBECK RUNNER
 #
 ###
-config.update({
-    'mongrel2_pair': (config[RECV_SPEC], config[SEND_SPEC]),
+config = {
+    'mongrel2_pair': (RECV_SPEC, SEND_SPEC),
     'handler_tuples': [(r'^/$', GameListHandler),
                        (r'^/create$', CreateGameHandler),
                        (r'^/(?P<game_name>[^/]+)$', ForwardToGameHandler),
@@ -339,10 +281,10 @@ config.update({
                        (r'^/(?P<game_name>[^/]+)/start$', StartHandler),
                        (r'^/(?P<game_name>[^/]+)/move$', MoveHandler),
                        (r'^/(?P<game_name>[^/]+)/chat$', ChatHandler)],
-    'cookie_secret': config[COOKIE_SECRET],
-    'db_conn': redis.StrictRedis(db=config[DB]),
+    'cookie_secret': COOKIE_SECRET,
+    'db_conn': redis.StrictRedis(db=DB),
     'template_loader': load_mustache_env('./templates')
-})
+}
 
 opengold = Brubeck(**config)
 opengold.run()

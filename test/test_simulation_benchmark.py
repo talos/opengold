@@ -11,8 +11,6 @@ from uuid import uuid4
 from threading import Thread
 
 from helpers import game, unittest, LOG, COUNTRY_NAMES, PLAYER_NAMES
-from pprint import pprint
-
 
 def random_ai():
     """
@@ -137,20 +135,20 @@ class SimulationBenchmarkTest(unittest.TestCase):
         print "%s games with %s threaded players took %s seconds." % \
             (n_games, n_players, duration)
 
-    def test_one_game_two_random_greenlet_players(self):
-        self.x_games_x_greenlet_players(1, 2)
+    # def test_one_game_two_random_greenlet_players(self):
+    #     self.x_games_x_greenlet_players(1, 2)
 
-    def test_one_game_eight_random_greenlet_players(self):
-        self.x_games_x_greenlet_players(1, 8)
+    # def test_one_game_eight_random_greenlet_players(self):
+    #     self.x_games_x_greenlet_players(1, 8)
 
-    def test_five_games_eight_random_greenlet_players(self):
-        self.x_games_x_greenlet_players(5, 8)
+    # def test_five_games_eight_random_greenlet_players(self):
+    #     self.x_games_x_greenlet_players(5, 8)
 
-    def test_fifty_games_four_random_greenlet_players(self):
-        self.x_games_x_greenlet_players(50, 4)
+    # def test_fifty_games_four_random_greenlet_players(self):
+    #     self.x_games_x_greenlet_players(50, 4)
 
-    def test_hundred_games_four_random_greenlet_players(self):
-        self.x_games_x_greenlet_players(100, 4)
+    # def test_hundred_games_four_random_greenlet_players(self):
+    #     self.x_games_x_greenlet_players(100, 4)
 
     # def test_one_game_two_random_threaded_players(self):
     #     self.x_games_x_threaded_players(1, 2)
@@ -193,7 +191,3 @@ class SimulationBenchmarkTest(unittest.TestCase):
 
     # def test_one_hundred_games_four_random_threaded_players(self):
     #     self.x_games_x_threaded_players(100, 4)
-
-# Primitive runner!
-if __name__ == '__main__':
-    unittest.main()
