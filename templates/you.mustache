@@ -36,7 +36,10 @@
   {{#game}}
     {{^round}}
     <form action="join" method="post">
-      <div><input class="text" type="text" title="Name" name="player" /></div>
+      <div>
+        <label for="player">Join this game as </label>
+        <input class="text" type="text" title="Name" name="player" />
+      </div>
       <div><input type="submit" value="" class="card join" /></div>
     </form>
     {{/round}}
