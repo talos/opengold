@@ -115,7 +115,7 @@ class GameListHandler(MustacheRendering):
                 self.set_body(json.dumps(context))
                 return self.render()
             else:
-                context[JS_PATH] = JS_PATH
+                context['js_path'] = JS_PATH
                 return self.render_template('main', **context)
         except coro_timeout.Timeout:
             if is_json_request(self.message):
@@ -171,7 +171,7 @@ class GameHandler(MustacheRendering, PlayerMixin):
                 self.set_body(json.dumps(context))
                 return self.render()
             else:
-                context[JS_PATH] = JS_PATH
+                context['js_path'] = JS_PATH
                 return self.render_template('main', **context)
         except coro_timeout.Timeout:
             if is_json_request(self.message):

@@ -4,12 +4,18 @@ import time
 import logging
 import sys
 
-if sys.version.find('2.7') == 0:
+# if sys.version.find('2.7') == 0:
+#     import unittest
+# elif sys.version.find('2.6') == 0:
+#     import unittest2 as unittest
+# else:
+#     print "Python %s not tested with opengold.  Use 2.6 or 2.7." % sys.version
+
+try:
     import unittest
-elif sys.version.find('2.6') == 0:
+except ImportError:
     import unittest2 as unittest
-else:
-    print "Python %s not tested with opengold.  Use 2.6 or 2.7." % sys.version
+    unittest
 
 #from threading import Thread
 
@@ -94,7 +100,7 @@ def fake_deal(r, mocked_key, card_name):
     r.spop = mock_pop
 
 
-HOST = "http://localhost:2000"
+HOST = "http://opengold.accursedware.com/"
 
 class TestOpengoldServer(unittest.TestCase):
     """
