@@ -151,11 +151,11 @@ input.card:hover {
 }
 
 /* Artifacts */
-.card_cockring    { background-image: url('img/artifacts/cockring.png'); }
-.card_gingerbread { background-image: url('img/artifacts/gingerbread.png'); }
-.card_nazi        { background-image: url('img/artifacts/nazi.png'); }
-.card_shrek       { background-image: url('img/artifacts/shrek.png'); }
-.card_tube        { background-image: url('img/artifacts/tube.png'); }
+.card_cockring    { width: 125px; height: 100px; background-image: url('img/artifacts/cockring.png'); }
+.card_gingerbread { width: 125px; height: 100px; background-image: url('img/artifacts/gingerbread.png'); }
+.card_nazi        { width: 125px; height: 100px; background-image: url('img/artifacts/nazi.png'); }
+.card_shrek       { width: 125px; height: 100px; background-image: url('img/artifacts/shrek.png'); }
+.card_tube        { width: 125px; height: 100px; background-image: url('img/artifacts/tube.png'); }
 
 /* Hazards */
 .card_bitches { background-image: url('img/hazards/bitches.png'); }
