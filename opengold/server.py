@@ -3,10 +3,9 @@ import json
 import urllib2
 
 import game
-from config import DB, JS_PATH, COOKIE_SECRET, LONGPOLL_TIMEOUT, RECV_SPEC, \
-                   SEND_SPEC
+from config import DB, JS_PATH, COOKIE_SECRET, LONGPOLL_TIMEOUT, PORT
 
-from brubeck.connections import Mongrel2Connection
+from brubeck.connections import WSGIConnection
 from brubeck.templating import load_mustache_env, MustacheRendering
 from brubeck.request_handling import Brubeck, WebMessageHandler
 
@@ -83,7 +82,8 @@ def is_json_request(message):
     """
     True if this request was for JSON, False otherwise.
     """
-    return message.headers.get('accept').rfind('application/json') > -1
+    accept = message.headers.get('accept') or message.headers.get('HTTP_ACCEPT')
+    return accept.rfind('application/json') > -1
 
 
 ###
@@ -273,7 +273,7 @@ class MoveHandler(WebMessageHandler, PlayerMixin):
 #
 ###
 config = {
-    'msg_conn': Mongrel2Connection(RECV_SPEC, SEND_SPEC),
+    'msg_conn': WSGIConnection(port=PORT),
     'handler_tuples': [(r'^/$', GameListHandler),
                        (r'^/create$', CreateGameHandler),
                        (r'^/(?P<game_name>[^/]+)$', ForwardToGameHandler),
