@@ -1,0 +1,9 @@
+brubeck==0.4.0
+gevent==0.13.6
+gevent-zeromq==0.2.2
+greenlet==0.3.3
+pystache==0.5.3
+python-dateutil==2.0
+pyzmq==2.1.11
+redis==2.4.11
+ujson==1.15

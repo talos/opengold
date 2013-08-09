@@ -5,8 +5,9 @@ import urllib2
 import game
 from config import DB, JS_PATH, COOKIE_SECRET, LONGPOLL_TIMEOUT, RECV_SPEC, \
                    SEND_SPEC
-from templating import load_mustache_env, MustacheRendering
 
+from brubeck.connections import Mongrel2Connection
+from brubeck.templating import load_mustache_env, MustacheRendering
 from brubeck.request_handling import Brubeck, WebMessageHandler
 
 try:
@@ -272,7 +273,7 @@ class MoveHandler(WebMessageHandler, PlayerMixin):
 #
 ###
 config = {
-    'mongrel2_pair': (RECV_SPEC, SEND_SPEC),
+    'msg_conn': Mongrel2Connection(RECV_SPEC, SEND_SPEC),
     'handler_tuples': [(r'^/$', GameListHandler),
                        (r'^/create$', CreateGameHandler),
                        (r'^/(?P<game_name>[^/]+)$', ForwardToGameHandler),
